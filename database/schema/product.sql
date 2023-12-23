@@ -5,7 +5,7 @@ CREATE TABLE product (
     description TEXT,
     short_description TEXT,
     image TEXT UNIQUE ON CONFLICT ABORT,
-    forwarded INTEGER,
+    forwarded INTEGER DEFAULT 0,
     price INTEGER,
-    amount INTEGER
+    amount INTEGER DEFAULT 0
 );
