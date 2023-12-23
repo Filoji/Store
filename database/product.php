@@ -35,14 +35,31 @@ class Product
         return $request->fetch(PDO::FETCH_ASSOC);
     }
 
-    function get_from_id($id) : array|bool{
-        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id >= :id ORDER BY id LIMIT 10;")))
+    function get_from_id($id, $number = 10) : array|bool{
+        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id >= :id ORDER BY id LIMIT " . $number . ";")))
             return false;
         if (!($request->execute([
             ':id' => $id
         ])))
             return false;
         return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    private function set_changes($values) : string {
+        $result = "";
+        foreach (array_keys($values) as $key) {
+            if (strlen($result))
+                $result .= ', ' . $key . ' = :' . $key;
+            else
+                $result .= $key . ' = :' . $key;
+        }
+        return $result;
+    }
+
+    function update($id, $values) : bool {
+        if (!($request = $this->pdo->prepare("UPDATE OR ABORT product SET " . $this->set_changes($values) . " WHERE id = :id;")))
+            return false;
+        return $request->execute(array_merge($values, ['id' => $id]));
     }
 
     function delete($id) : bool {
