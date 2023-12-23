@@ -2,7 +2,6 @@
 namespace DataManager;
 use \PDO;
 
-
 class Product 
 {
     private $dsn;
@@ -43,6 +42,12 @@ class Product
         ])))
             return false;
         return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_forwarded() : array|bool{
+        if (!($query = $this->pdo->query("SELECT * FROM product WHERE forwarded = 1")))
+            return false;
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     private function set_changes($values) : string {
