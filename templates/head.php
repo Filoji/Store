@@ -1,6 +1,7 @@
 <?php
 $menu_pages = [
-    'Home' => '/'
+    'Home' => '/',
+    'Item List' => '/admin/item_list.php'
 ]
 ?>
 

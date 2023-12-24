@@ -35,10 +35,22 @@ class Product
     }
 
     function get_from_id($id, $number = 10) : array|bool{
-        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id >= :id ORDER BY id LIMIT " . $number . ";")))
+        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id >= :id ORDER BY id LIMIT :number;")))
             return false;
         if (!($request->execute([
-            ':id' => $id
+            ':id' => $id,
+            ':number' => $number
+        ])))
+            return false;
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_from_rank($rank, $number = 10) : array|bool {
+        if (!($request = $this->pdo->prepare("SELECT * FROM product ORDER BY id LIMIT :number OFFSET :rank;")))
+            return false;
+        if (!($request->execute([
+            ':rank' => $rank,
+            ':number' => $number
         ])))
             return false;
         return $request->fetchAll(PDO::FETCH_ASSOC);
