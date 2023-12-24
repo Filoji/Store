@@ -6,5 +6,6 @@ function include_with_props(string $file ,array $props){
 
 function redirect($location) {
     header('Location: ' . $location, TRUE, 302);
+    exit();
 }
 ?>
