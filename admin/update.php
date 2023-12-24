@@ -2,7 +2,7 @@
 include_once "utils/smarter.php";
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET') and (!isset($_GET['id']) or !is_numeric($_GET['id']))){
-    Smarter\redirect('/index.php');
+    Smarter\redirect('/');
 }
 
 include_once "database/product.php";
@@ -12,7 +12,7 @@ $products = new DataManager\Product();
 
 if (($_SERVER['REQUEST_METHOD'] == 'POST') and isset($_POST['id'])){
     if (!$item = $products->get_by_id($_POST['id']))
-        Smarter\redirect('/index.php');
+        Smarter\redirect('/');
     $result = array();
     foreach ($item as $column => $value) {
         switch ($column) {

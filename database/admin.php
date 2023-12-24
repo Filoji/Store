@@ -8,7 +8,7 @@ class Admin
     private $pdo;
     function __construct()
     {
-        $this->dsn = 'sqlite:database/app.db';
+        $this->dsn = 'sqlite:' . $_SERVER['DOCUMENT_ROOT'] . '/database/app.db';
         $this->pdo = new PDO($this->dsn);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
     }
