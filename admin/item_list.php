@@ -6,8 +6,10 @@ Smarter\include_with_props("templates/head.php", [
     'title' => 'Item list'
 ]);
 
+$item_per_page = 5;
+
 $products = new DataManager\Product();
-$items = $products->get_from_rank((isset($_GET['page']) and is_numeric($_GET['page'])) ? 10 * intval($_GET['page']) : 0);
+$items = $products->get_from_rank((isset($_GET['page']) and is_numeric($_GET['page'])) ? $item_per_page * intval($_GET['page']) : 0, $item_per_page);
 ?>
 <h1>Item List</h1>
 <div>
@@ -16,6 +18,9 @@ $items = $products->get_from_rank((isset($_GET['page']) and is_numeric($_GET['pa
         <button>Précédent</button>
     </a>
 <?php endif ?>
+<a href="/admin/create.php">
+    <button>Create</button>
+</a>
 <?php if(!empty($items)): ?>
     <a href="/admin/item_list.php?page=<?= (isset($_GET['page']) and is_numeric($_GET['page'])) ? intval($_GET['page']) + 1 : 1 ?>">
         <button>Suivant</button>
