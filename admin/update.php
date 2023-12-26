@@ -44,33 +44,33 @@ if (!$item = $products->get_by_id($_GET['id'])){
 }
 
 Smarter\include_with_props("templates/head.php", [
-    'title' => 'Update'
+    'title' => 'Mettre à jour'
 ]);
 ?>
 
-<h1>Update</h1>
+<h1>Mettre à jour</h1>
 
 <div>
     <form method="post">
     <input type="hidden" name="id" value="<?= $item['id'] ?>" />
     <div>
-        <label>Name</label>
+        <label>Nom : </label>
         <input type="text" name="name" value="<?= $item['name'] ?>" />
     </div>
     <div>
-        <label>Short Description</label>
+        <label>Courte description : </label>
         <input type="text" name="short_description" value="<?= $item['short_description'] ?>" />
     </div>
     <div>
-        <label>Description</label>
+        <label>Description : </label>
         <input type="text" name="description" value="<?= $item['description'] ?>" />
     </div>
     <div>
-        <label>Price</label>
+        <label>Prix : </label>
         <input type="number" name="price" step="0.01" value="<?= $item['price']/100 ?>" />
     </div>
     <div>
-        <label>Forwarded</label>
+        <label>En avant : </label>
         <input type="checkbox" name="forwarded" <?= $item['forwarded'] ? 'checked' : '' ?> />
     </div>
     <input type="submit" value="Valider" />

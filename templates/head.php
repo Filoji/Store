@@ -1,12 +1,13 @@
 <?php
 $menu_pages = [
-    'Home' => '/',
-    'Item List' => '/admin/item_list.php'
+    'Accueil' => '/',
+    'Liste de produit' => '/admin/item_list.php',
+    'Stocks' => '/admin/stocks.php'
 ]
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

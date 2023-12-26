@@ -20,26 +20,26 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
 
 Smarter\include_with_props(
     "templates/head.php", [
-    'title' => 'Create'
+    'title' => 'Créer'
 ]);
 ?>
-<h1>Create</h1>
+<h1>Créer</h1>
 <div>
     <form method="post">
         <div>
-            <label>Name</label>
+            <label>Nom : </label>
             <input type="text" name="name"/>
         </div>
         <div>
-            <label>Short Description</label>
+            <label>Courte description : </label>
             <input type="text" name="short_description" />
         </div>
         <div>
-            <label>Description</label>
+            <label>Description : </label>
             <input type="text" name="description" />
         </div>
         <div>
-            <label>Price</label>
+            <label>Prix : </label>
             <input type="number" name="price" step="0.01" />
         </div>
         <input type="submit" value="Valider" />

@@ -3,15 +3,15 @@ include_once "database/product.php";
 include_once "utils/smarter.php";
 
 Smarter\include_with_props("templates/head.php", [
-    'title' => 'Item list'
+    'title' => 'Liste de produit'
 ]);
 
-$item_per_page = 5;
+$item_per_page = 10;
 
 $products = new DataManager\Product();
 $items = $products->get_from_rank((isset($_GET['page']) and is_numeric($_GET['page'])) ? $item_per_page * intval($_GET['page']) : 0, $item_per_page);
 ?>
-<h1>Item List</h1>
+<h1>Liste de produit</h1>
 <div>
 <?php if(isset($_GET['page']) and is_numeric($_GET['page']) and (intval($_GET['page']) > 0)): ?>
     <a href="/admin/item_list.php?page=<?= intval($_GET['page']) - 1 ?>">
@@ -19,9 +19,9 @@ $items = $products->get_from_rank((isset($_GET['page']) and is_numeric($_GET['pa
     </a>
 <?php endif ?>
 <a href="/admin/create.php">
-    <button>Create</button>
+    <button>Créer</button>
 </a>
-<?php if(!empty($items)): ?>
+<?php if(count($items)==$item_per_page): ?>
     <a href="/admin/item_list.php?page=<?= (isset($_GET['page']) and is_numeric($_GET['page'])) ? intval($_GET['page']) + 1 : 1 ?>">
         <button>Suivant</button>
     </a>
@@ -29,8 +29,8 @@ $items = $products->get_from_rank((isset($_GET['page']) and is_numeric($_GET['pa
 </div>
 <?php foreach ($items as $item): ?>
     <div>
-        <div>Id : <?= $item['id'] ?></div>
-        <div>Name : <?= $item['name'] ?></div>
+        <div>ID : <?= $item['id'] ?></div>
+        <div>Nom : <?= $item['name'] ?></div>
         <a href="/admin/update.php?id=<?= $item['id'] ?>">
             <button>Editer</button>
         </a>

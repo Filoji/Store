@@ -10,11 +10,11 @@ $products = new DataManager\Product();
 if(!($item = $products->get_by_id(intval($_GET['id']))))
     Smarter\redirect('/');
 
-Smarter\include_with_props("templates/head.php", ['title' => 'Item']);
+Smarter\include_with_props("templates/head.php", ['title' => 'Produit']);
 ?>
 <h1>Item</h1>
 <h2><?= $item['name'] ?></h2>
 <p><?= $item['description'] ?></p>
-<p>Price : <?= intval($item['price'])/100 ?>€</p>
-<p>Amount left : <?= $item['amount'] ?></p>
+<p>Prix : <?= intval($item['price'])/100 ?>€</p>
+<p>Quantité en stock : <?= $item['amount'] ?></p>
 <?php include "templates/tail.php" ?>
