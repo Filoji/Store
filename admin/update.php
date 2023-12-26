@@ -1,12 +1,19 @@
 <?php
 include_once "utils/smarter.php";
 
+session_name("admin_session");
+session_start();
+
+if (!(isset($_SESSION['logged']) and $_SESSION['logged'])){
+    Smarter\redirect("/admin/login.php");
+}
+
+
 if (($_SERVER['REQUEST_METHOD'] == 'GET') and (!isset($_GET['id']) or !is_numeric($_GET['id']))){
-    Smarter\redirect('/');
+    Smarter\redirect('/admin');
 }
 
 include_once "database/product.php";
-include_once "database/admin.php";
 
 $products = new DataManager\Product();
 
