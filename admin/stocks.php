@@ -42,12 +42,12 @@ Smarter\include_with_props("templates/head.php", [
 
 <div>
 <?php if(isset($_GET['page']) and is_numeric($_GET['page']) and (intval($_GET['page']) > 0)): ?>
-    <a href="/admin/item_list.php?page=<?= intval($_GET['page']) - 1 ?>">
+    <a href="/admin/stocks.php?page=<?= intval($_GET['page']) - 1 ?>">
         <button>Précédent</button>
     </a>
 <?php endif ?>
 <?php if(count($items)==$item_per_page): ?>
-    <a href="/admin/item_list.php?page=<?= (isset($_GET['page']) and is_numeric($_GET['page'])) ? intval($_GET['page']) + 1 : 1 ?>">
+    <a href="/admin/stocks.php?page=<?= (isset($_GET['page']) and is_numeric($_GET['page'])) ? intval($_GET['page']) + 1 : 1 ?>">
         <button>Suivant</button>
     </a>
 <?php endif ?>

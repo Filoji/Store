@@ -11,7 +11,7 @@ if (!(isset($_SESSION['logged']) and $_SESSION['logged'])){
 include_once "database/product.php";
 
 Smarter\include_with_props("templates/head.php", [
-    'title' => 'Liste de produit'
+    'title' => 'Liste des produits'
 ]);
 
 $item_per_page = 10;
@@ -19,7 +19,7 @@ $item_per_page = 10;
 $products = new DataManager\Product();
 $items = $products->get_from_rank((isset($_GET['page']) and is_numeric($_GET['page'])) ? $item_per_page * intval($_GET['page']) : 0, $item_per_page);
 ?>
-<h1>Liste de produit</h1>
+<h1>Liste des produits</h1>
 <div>
 <?php if(isset($_GET['page']) and is_numeric($_GET['page']) and (intval($_GET['page']) > 0)): ?>
     <a href="/admin/item_list.php?page=<?= intval($_GET['page']) - 1 ?>">

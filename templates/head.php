@@ -1,8 +1,9 @@
 <?php
 $menu_pages = [
     'Accueil' => '/',
-    'Liste de produit' => '/admin/item_list.php',
-    'Stocks' => '/admin/stocks.php'
+    'Liste des produits' => '/admin/item_list.php',
+    'Stocks' => '/admin/stocks.php',
+    'Panier' => '/cart.php'
 ]
 ?>
 
