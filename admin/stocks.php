@@ -60,7 +60,7 @@ Smarter\include_with_props("templates/head.php", [
         <div>Nom : <?= $item['name'] ?></div>
         <div>Quantité : <?= $item['amount'] ?></div>
         <label>Ajouter : </label>
-        <input type="number" step="1" name="<?= $item['id'] ?>" value="0" />
+        <input type="number" step="1" min="<?= -1 * $item['amount'] ?>" name="<?= $item['id'] ?>" value="0" />
     </div>
     <?php endforeach; ?>
     <input type="submit" value="Valider" />

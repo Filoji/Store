@@ -13,12 +13,16 @@ $products = new DataManager\Product();
 if(!($item = $products->get_by_id(intval($_GET['id']))))
     Smarter\redirect('/');
 
+if (isset($_SESSION['id_' . strval($item['id'])]) and ($item['amount']< $_SESSION['id_' . strval($item['id'])])){
+    unset($_SESSION['id_' . strval($item['id'])]);
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['action'])){
     if ($_POST['action']=='add' and !isset($_SESSION['id_' . $item['id']]) and ($item['amount'] > 0)){
         $_SESSION['id_' . $item['id']] = 1;
     }
     else if ($_POST['action']=='edit' and isset($_SESSION['id_' . $item['id']])){
-        if (isset($_POST['amount']) and ($_POST['amount'] < $item['amount']) and ($_POST['amount'] > 0))
+        if (isset($_POST['amount']) and ($_POST['amount'] <= $item['amount']) and ($_POST['amount'] > 0))
             $_SESSION['id_' . $item['id']] = $_POST['amount'];
         else
             unset($_SESSION['id_' . $item['id']]);

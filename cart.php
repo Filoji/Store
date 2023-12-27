@@ -14,7 +14,7 @@ $total = 0;
 ?>
 <h1>Panier</h1>
 <?php foreach($_SESSION as $id => $amount):
-    if ($item = $products->get_by_id(intval(substr($id, 3))) and empty($item)):
+    if ($item = $products->get_by_id(intval(substr($id, 3))) and isset($item['amount']) and ($item['amount'] < $amount)):
         unset($_SESSION[$id]);
     else: 
         $total += intval($item['price']) * $amount ?>
