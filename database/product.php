@@ -25,7 +25,7 @@ class Product
     }
 
     function get_by_id($id) : array|bool{
-        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id = :id;")))
+        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id = :id AND active = 1;")))
             return false;
         if (!($request->execute([
             ':id' => $id
@@ -35,7 +35,7 @@ class Product
     }
 
     function get_from_id($id, $number = 10) : array|bool{
-        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id >= :id ORDER BY id LIMIT :number;")))
+        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE id >= :id  AND active = 1 ORDER BY id LIMIT :number;")))
             return false;
         if (!($request->execute([
             ':id' => $id,
@@ -46,7 +46,7 @@ class Product
     }
 
     function get_from_rank($rank, $number = 10) : array|bool {
-        if (!($request = $this->pdo->prepare("SELECT * FROM product ORDER BY id LIMIT :number OFFSET :rank;")))
+        if (!($request = $this->pdo->prepare("SELECT * FROM product WHERE active = 1 ORDER BY id LIMIT :number OFFSET :rank;")))
             return false;
         if (!($request->execute([
             ':rank' => $rank,
@@ -57,7 +57,7 @@ class Product
     }
 
     function get_forwarded() : array|bool{
-        if (!($query = $this->pdo->query("SELECT * FROM product WHERE forwarded = 1")))
+        if (!($query = $this->pdo->query("SELECT * FROM product WHERE forwarded = 1 AND active = 1")))
             return false;
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -74,13 +74,13 @@ class Product
     }
 
     function update($id, $values) : bool {
-        if (!($request = $this->pdo->prepare("UPDATE OR ABORT product SET " . $this->set_changes($values) . " WHERE id = :id;")))
+        if (!($request = $this->pdo->prepare("UPDATE OR ABORT product SET " . $this->set_changes($values) . " WHERE id = :id  AND active = 1;")))
             return false;
         return $request->execute(array_merge($values, ['id' => $id]));
     }
 
     function delete($id) : bool {
-        if (!($request = $this->pdo->prepare("DELETE FROM product WHERE id = :id;")))
+        if (!($request = $this->pdo->prepare("UPDATE OR ABORT product SET active = 0 WHERE id = :id AND active = 1;")))
             return false;
         return $request->execute([
             ':id' => $id

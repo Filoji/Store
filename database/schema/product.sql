@@ -7,5 +7,6 @@ CREATE TABLE product (
     image TEXT UNIQUE ON CONFLICT ABORT,
     forwarded INTEGER DEFAULT 0,
     price INTEGER,
-    amount INTEGER DEFAULT 0
+    amount INTEGER DEFAULT 0,
+    active INTEGER DEFAULT 1
 );
