@@ -82,6 +82,9 @@ Smarter\include_with_props("templates/head.php", [
     </div>
     <input type="submit" value="Valider" />
     </form>
+    <a href="/admin/delete.php?id=<?= $item['id'] ?>">
+        <button>Supprimer le produit</button>
+    </a>
 </div>
 
 <?php include "templates/tail.php"; ?>
